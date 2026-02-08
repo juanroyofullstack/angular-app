@@ -1,0 +1,16 @@
+<header>
+  <div class="container">
+    <h1>{{ title }}</h1>
+    <nav>
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        >Inicio</a
+      >
+      <a routerLink="/about" routerLinkActive="active">Sobre mí</a>
+      <a routerLink="/projects" routerLinkActive="active">Proyectos</a>
+      <a routerLink="/contact" routerLinkActive="active">Contacto</a>
+    </nav>
+  </div>
+</header>
