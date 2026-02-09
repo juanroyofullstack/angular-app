@@ -1,11 +1,18 @@
 import { Component } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  constructor(private router: Router) {}
 
+  goToProjects() {
+    this.router.navigate(['/projects'], {
+      queryParams: { category: 'web', sort: 'date' },
+    });
+  }
 }

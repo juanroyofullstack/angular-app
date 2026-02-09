@@ -1,1 +1,14 @@
 <p>projects works!</p>
+<a routerLink="/project/1">Proyecto 1</a>
+<a routerLink="/project/2">Proyecto 2</a>
+<button (click)="goToProject(3)">Ir al proyecto 3</button>
+<a [routerLink]="['/project', projectId]">Ver proyecto</a>
+<div class="projects">
+  <h1>Mis Proyectos</h1>
+  <div class="project-list">
+    <div *ngFor="let project of projects" class="project-card">
+      <h3>{{ project.name }}</h3>
+      <a [routerLink]="['/project', project.id]">Ver detalle</a>
+    </div>
+  </div>
+</div>
