@@ -1,16 +1,52 @@
-<div class="Projects">
-  <p>projects works!</p>
-  <a routerLink="/project/1">Proyecto 1</a>
-  <a routerLink="/project/2">Proyecto 2</a>
-  <button (click)="goToProject(3)">Ir al proyecto 3</button>
-  <a [routerLink]="['/project', projectId]">Ver proyecto</a>
-  <div class="projects">
-    <h1>Mis Proyectos</h1>
-    <div class="project-list">
-      <div *ngFor="let project of projects" class="project-card">
-        <h3>{{ project.name }}</h3>
-        <a [routerLink]="['/project', project.id]">Ver detalle</a>
-      </div>
+<main class="projects">
+  <header class="projects__header">
+    <div>
+      <h1>Projects</h1>
+      <p>
+        A selection of personal and client projects where I applied Angular,
+        TypeScript and modern frontend practices.
+      </p>
     </div>
-  </div>
-</div>
+
+    <div class="projects__meta" *ngIf="category || sort">
+      <span *ngIf="category" class="projects__badge">
+        Category: {{ category }}
+      </span>
+      <span *ngIf="sort" class="projects__badge"> Sorted by: {{ sort }} </span>
+    </div>
+  </header>
+
+  <section class="projects__grid">
+    <article *ngFor="let project of projects" class="projects__card">
+      <header class="projects__card-header">
+        <h2>{{ project.name }}</h2>
+        <span class="projects__type">{{ project.type }}</span>
+      </header>
+
+      <p class="projects__description">
+        {{ project.description }}
+      </p>
+
+      <div class="projects__tags">
+        <span class="tag" *ngFor="let techItem of project.tech">
+          {{ techItem }}
+        </span>
+      </div>
+
+      <div class="projects__actions">
+        <a class="btn btn--ghost" [routerLink]="['/project', project.id]">
+          View details
+        </a>
+      </div>
+    </article>
+  </section>
+
+  <section class="projects__cta">
+    <h2>Looking for something specific?</h2>
+    <p>
+      If you want to see more examples or a project closer to your industry,
+      feel free to reach out.
+    </p>
+    <a class="btn btn--primary" [routerLink]="['/contact']"> Get in touch </a>
+  </section>
+</main>
