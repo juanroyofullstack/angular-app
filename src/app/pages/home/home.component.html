@@ -1,7 +1,118 @@
-<p>home works!</p>
-<a
-  [routerLink]="['/projects']"
-  [queryParams]="{ category: 'web', sort: 'date' }"
->
-  Ver proyectos web
-</a>
+<main class="home">
+  <!-- Hero -->
+  <section class="home__hero">
+    <div class="home__hero-text">
+      <p class="home__hero-greeting">Hi, I'm</p>
+      <h1 class="home__hero-title">Juan Royo</h1>
+      <h2 class="home__hero-subtitle">
+        Frontend Developer specialized in Angular
+      </h2>
+      <p class="home__hero-description">
+        I design and build modern, fast and maintainable web applications, with
+        a strong focus on performance, accessibility and user experience.
+      </p>
+
+      <div class="home__hero-cta">
+        <button class="btn btn--primary" (click)="goToProjects()">
+          View projects
+        </button>
+        <a class="btn btn--ghost" [routerLink]="['/contact']"> Contact </a>
+      </div>
+    </div>
+
+    <div class="home__hero-visual">
+      <div class="home__avatar">
+        <span class="home__avatar-initials">JR</span>
+      </div>
+      <p class="home__hero-role">Frontend · Angular · UX</p>
+    </div>
+  </section>
+
+  <!-- Featured projects -->
+  <section class="home__section">
+    <header class="home__section-header">
+      <h2>Featured projects</h2>
+      <p>
+        A selection of recent work where I used Angular, TypeScript and solid
+        frontend architecture practices.
+      </p>
+    </header>
+
+    <div class="home__projects-grid">
+      <article class="home__project-card">
+        <h3>Analytics dashboard</h3>
+        <p>
+          Angular SPA with interactive charts, lazy loading and performance
+          optimizations for large datasets.
+        </p>
+        <p class="home__project-tech">Angular · TypeScript · RxJS</p>
+      </article>
+
+      <article class="home__project-card">
+        <h3>Multi-language landing</h3>
+        <p>
+          Fully responsive marketing page with i18n, basic SEO and smooth
+          animations.
+        </p>
+        <p class="home__project-tech">Angular · SCSS · i18n</p>
+      </article>
+
+      <article class="home__project-card">
+        <h3>Internal company portal</h3>
+        <p>
+          Internal management portal with authentication, roles, guards and
+          advanced forms.
+        </p>
+        <p class="home__project-tech">Angular · Angular Material · JWT</p>
+      </article>
+    </div>
+
+    <div class="home__section-cta">
+      <a class="link" [routerLink]="['/projects']">View all projects</a>
+    </div>
+  </section>
+
+  <!-- About (short) -->
+  <section class="home__section home__section--alt">
+    <header class="home__section-header">
+      <h2>About me</h2>
+    </header>
+    <p class="home__about-text">
+      I'm a frontend developer focused on creating clear, accessible and
+      user-centered interfaces. I enjoy working with Angular, paying attention
+      to visual details and collaborating closely with design and product to
+      build impactful digital experiences.
+    </p>
+    <div class="home__section-cta">
+      <a class="link" [routerLink]="['/about']">Learn more about me</a>
+    </div>
+  </section>
+
+  <!-- Tech stack -->
+  <section class="home__section">
+    <header class="home__section-header">
+      <h2>Stack & tools</h2>
+    </header>
+
+    <div class="home__tags">
+      <span class="tag">Angular</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">SCSS</span>
+      <span class="tag">HTML5</span>
+      <span class="tag">RxJS</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">Git</span>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="home__section home__cta-final">
+    <h2>Ready to start your next project?</h2>
+    <p>
+      If you have an idea in mind, I'd love to help you turn it into a polished,
+      professional web application.
+    </p>
+    <a class="btn btn--primary" [routerLink]="['/contact']"> Get in touch </a>
+  </section>
+</main>
