@@ -35,7 +35,6 @@ export class ProjectsComponent implements OnInit {
       type: 'Web app',
     },
   ];
-
   category: string | null = null;
   sort: string | null = null;
 

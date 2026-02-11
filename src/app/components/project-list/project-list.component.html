@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let p of projects$ | async">
+    {{ p.name }} – {{ p.description }}
+  </li>
+</ul>
