@@ -1,0 +1,249 @@
+@use "sass:color";
+
+:host {
+  width: 100%;
+}
+
+.contact {
+  min-height: 100vh;
+  padding: 4rem 1.5rem 5rem;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
+
+.contact__header h1 {
+  margin: 0 0 0.5rem;
+}
+
+.contact__header p {
+  margin: 0;
+  line-height: 1.6;
+  max-width: 38rem;
+}
+
+// ── Form ──────────────────────────────────────────────────────────────────────
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.contact__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.contact__char-count {
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.55;
+}
+
+.contact__input,
+.contact__textarea {
+  padding: 0.65rem 0.9rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.02);
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  transition:
+    border-color 0.16s ease,
+    box-shadow 0.16s ease;
+  outline: none;
+
+  &::placeholder {
+    opacity: 0.45;
+  }
+
+  &:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+  }
+}
+
+.contact__textarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.55;
+}
+
+// Error state
+.contact__field--error {
+  .contact__input,
+  .contact__textarea {
+    border-color: #e53e3e;
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.15);
+    }
+  }
+}
+
+.contact__error {
+  font-size: 0.82rem;
+  color: #e53e3e;
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+
+.contact__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.25rem;
+}
+
+// ── Feedback (success / error) ────────────────────────────────────────────────
+
+.contact__feedback {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid;
+
+  p {
+    margin: 0.2rem 0 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  strong {
+    font-size: 1rem;
+  }
+}
+
+.contact__feedback--success {
+  border-color: rgba(16, 185, 129, 0.55);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.contact__feedback-icon {
+  flex-shrink: 0;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.contact__feedback .btn {
+  margin-left: auto;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+// ── Spinner ───────────────────────────────────────────────────────────────────
+
+.contact__spinner {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-top-color: #fff;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ── Shared button styles ──────────────────────────────────────────────────────
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  font-family: inherit;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 0.16s ease,
+    color 0.16s ease,
+    box-shadow 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+
+  &:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+  }
+}
+
+.btn--primary {
+  background: #4f46e5;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.45);
+
+  &:not(:disabled):hover {
+    background: color.scale(#4f46e5, $lightness: -6%);
+    transform: translateY(-1px);
+  }
+}
+
+.btn--ghost {
+  border-color: rgba(148, 163, 184, 0.9);
+  color: inherit;
+  background: transparent;
+
+  &:hover {
+    background: rgba(148, 163, 184, 0.1);
+  }
+}
+
+// ── Responsive ────────────────────────────────────────────────────────────────
+
+@media (max-width: 600px) {
+  .contact__row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding-inline: 1.1rem;
+    padding-top: 3rem;
+  }
+
+  .contact__feedback {
+    flex-wrap: wrap;
+  }
+}

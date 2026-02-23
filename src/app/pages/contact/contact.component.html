@@ -1,1 +1,111 @@
-<p>contact works!</p>
+<main class="contact">
+  <header class="contact__header">
+    <h1>Get in touch</h1>
+    <p>
+      Have a project in mind or just want to say hello? Fill out the form and
+      I'll get back to you as soon as possible.
+    </p>
+  </header>
+
+  <!-- Success state -->
+  <div *ngIf="submitState === 'sent'" class="contact__feedback contact__feedback--success">
+    <span class="contact__feedback-icon">&#10003;</span>
+    <div>
+      <strong>Message sent!</strong>
+      <p>Thanks for reaching out. I'll reply within 1–2 business days.</p>
+    </div>
+    <button class="btn btn--ghost" (click)="onReset()">Send another</button>
+  </div>
+
+  <!-- Form -->
+  <form
+    *ngIf="submitState !== 'sent'"
+    class="contact__form"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <div class="contact__row">
+      <!-- Name -->
+      <div class="contact__field" [class.contact__field--error]="isInvalid('name')">
+        <label class="contact__label" for="name">Name</label>
+        <input
+          id="name"
+          type="text"
+          class="contact__input"
+          formControlName="name"
+          placeholder="Juan Royo"
+          autocomplete="name"
+        />
+        <span *ngIf="isInvalid('name')" class="contact__error">
+          <ng-container *ngIf="name.errors?.['required']">Name is required.</ng-container>
+          <ng-container *ngIf="name.errors?.['minlength']">At least 2 characters.</ng-container>
+        </span>
+      </div>
+
+      <!-- Email -->
+      <div class="contact__field" [class.contact__field--error]="isInvalid('email')">
+        <label class="contact__label" for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="contact__input"
+          formControlName="email"
+          placeholder="you@example.com"
+          autocomplete="email"
+        />
+        <span *ngIf="isInvalid('email')" class="contact__error">
+          <ng-container *ngIf="email.errors?.['required']">Email is required.</ng-container>
+          <ng-container *ngIf="email.errors?.['email']">Enter a valid email address.</ng-container>
+        </span>
+      </div>
+    </div>
+
+    <!-- Subject -->
+    <div class="contact__field" [class.contact__field--error]="isInvalid('subject')">
+      <label class="contact__label" for="subject">Subject</label>
+      <input
+        id="subject"
+        type="text"
+        class="contact__input"
+        formControlName="subject"
+        placeholder="Project proposal, question…"
+      />
+      <span *ngIf="isInvalid('subject')" class="contact__error">
+        <ng-container *ngIf="subject.errors?.['required']">Subject is required.</ng-container>
+        <ng-container *ngIf="subject.errors?.['minlength']">At least 3 characters.</ng-container>
+      </span>
+    </div>
+
+    <!-- Message -->
+    <div class="contact__field" [class.contact__field--error]="isInvalid('message')">
+      <label class="contact__label" for="message">
+        Message
+        <span class="contact__char-count">{{ message.value?.length || 0 }} / 1000</span>
+      </label>
+      <textarea
+        id="message"
+        class="contact__textarea"
+        formControlName="message"
+        rows="6"
+        placeholder="Tell me about your project or question…"
+      ></textarea>
+      <span *ngIf="isInvalid('message')" class="contact__error">
+        <ng-container *ngIf="message.errors?.['required']">Message is required.</ng-container>
+        <ng-container *ngIf="message.errors?.['minlength']">At least 10 characters.</ng-container>
+        <ng-container *ngIf="message.errors?.['maxlength']">Maximum 1000 characters.</ng-container>
+      </span>
+    </div>
+
+    <div class="contact__actions">
+      <button
+        type="submit"
+        class="btn btn--primary"
+        [disabled]="submitState === 'sending'"
+      >
+        <span *ngIf="submitState === 'sending'" class="contact__spinner" aria-hidden="true"></span>
+        {{ submitState === 'sending' ? 'Sending…' : 'Send message' }}
+      </button>
+    </div>
+  </form>
+</main>
