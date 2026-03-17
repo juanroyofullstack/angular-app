@@ -28,7 +28,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       text: `De: ${name} <${email}>\n\n${message}`,
     });
 
-    res.status(200).json({ message: 'Mensaje enviado correctamente' });
+    return res.status(200).json({ message: 'Mensaje enviado correctamente' });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: 'Email failed' });

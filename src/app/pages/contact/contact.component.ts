@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -19,7 +20,10 @@ export class ContactComponent {
   form: FormGroup;
   submitState: SubmitState = 'idle';
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient,
+  ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
@@ -61,11 +65,15 @@ export class ContactComponent {
 
     this.submitState = 'sending';
 
-    // Simulate async submission (replace with real HTTP call)
-    setTimeout(() => {
-      this.submitState = 'sent';
-      this.form.reset();
-    }, 1200);
+    this.http.post('/api/contacts', this.form.value).subscribe({
+      next: () => {
+        this.submitState = 'sent';
+        this.form.reset();
+      },
+      error: () => {
+        this.submitState = 'error';
+      },
+    });
   }
 
   onReset(): void {
